@@ -1,11 +1,11 @@
-Setup guide
+###Setup guide
 
 1. Setup mongodb sharding for distribute database
 
 Sharding setup (locahost):
 Config server:
 
-"""
+```
 mongod --configsvr --port 28041 --bind_ip localhost --replSet config_repl --dbpath F:\mongodb\shard\configsrv
 mongod --configsvr --port 28042 --bind_ip localhost --replSet config_repl --dbpath F:\mongodb\shard\configsrv1
 mongod --configsvr --port 28043 --bind_ip localhost --replSet config_repl --dbpath F:\mongo\shard\configsrv2
@@ -111,10 +111,10 @@ mongos --configdb config_repl/localhost:28041,localhost:28042,localhost:28043 --
             db.course.getShardDistribution()
             db.result.getShardDistribution()
 
-"""
+```
 
 2. server setup
 
-"""
+```
 npm install
-"""
+```
