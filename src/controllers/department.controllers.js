@@ -2,21 +2,37 @@ import { Department } from "../models/department.models";
 
 const createDepartment = async (req, res) => {
   try {
-    const { name, departmentId, student, course } = req.body;
+    const data = req.body;
 
-    const deparment = await Department.create({
-      name,
-      departmentId,
-      student,
-      course,
-    });
+    const deparment = await Department.create(data);
 
-    if (!student) throw new ApiError(500, "Failed to create student");
+    if (!deparment) throw new ApiError(500, "Failed to create student");
 
-    res.status(200).json(new ApiResponse(200, student));
+    res.status(200).json(new ApiResponse(200, deparment));
   } catch (error) {
     res
       .status(error.statusCode || 500)
       .json(new ApiResponse(error.statusCode, error.messgae));
   }
 };
+
+const getDepartment = async (req, res) => {
+  try {
+    const allDepartment = await Department.find({});
+    res.status(200).json(new ApiResponse(200, allDepartment));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const deleteDepartment = async (req, res) => {
+  try {
+    const id = req.body.id;
+    const deletedDepartment = await Department.findByIdAndDelete({ id: id });
+    res.status(200).json(200, deleteDepartment);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { getDepartment, createDepartment, deleteDepartment };
